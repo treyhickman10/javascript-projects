@@ -1,3 +1,22 @@
+let resupply = function (fuel){
+  if (checkFuel(fuel) === 'green'){
+    return fuel - 100001;
+  } else if (checkFuel(fuel) === 'yellow') {
+    return fuel - 5001;
+  } else {
+    return fuel;
+  }
+}
+
+
+let notStealingCargo = function(arr, str){
+  let cargo = arr.indexOf(str)
+  if (cargo != -1){
+    notStolenCargo.push(str);
+    arr.splice(cargo, 1, "junk");
+  } return notStolenCargo 
+}
+
 function checkFuel(level) {
   if (level > 100000){
     return 'green';
@@ -20,7 +39,14 @@ function holdStatus(arr){
 
 let fuelLevel = 200000;
 let cargoHold = ['meal kits', 'space suits', 'first-aid kit', 'satellite', 'gold', 'water', 'AE-35 unit'];
+let fuelIntake = 0;
+let notStolenCargo = [];
 
+notStealingCargo(cargoHold, "satellite");
+notStealingCargo(cargoHold, 'AE-35 unit');
+console.log(resupply(fuelLevel));
+console.log(notStolenCargo);
+console.log(cargoHold);
 console.log("Fuel level: " + checkFuel(fuelLevel));
 console.log("Hold status: " + holdStatus(cargoHold));
 
@@ -32,8 +58,9 @@ console.log("Hold status: " + holdStatus(cargoHold));
 //b). You must siphon off fuel without alerting the TAs. Inside your function, you want to reduce the fuel level as much as possible WITHOUT changing the color returned by the checkFuel function.
 
 //c). Once you figure out how much fuel to pump out, return that value.
-
+  
 //d). Decide where to best place your function call to gather our new fuel.
+
 
 /* Next, liberate some of that glorious cargo.
  */
@@ -54,3 +81,9 @@ console.log("Hold status: " + holdStatus(cargoHold));
 //b). Call your anonymous fuel and cargo functions from within irs.
 
 //c). Use a template literal to return, "Raided _____ kg of fuel from the tanks, and stole ____ and ____ from the cargo hold."
+let irs = function (levelOfFuel, cargoInHold){
+resupply(levelOfFuel);
+notStealingCargo(cargoInHold, "satellite");
+notStealingCargo(cargoInHold, "AE-35 unit");
+return `Raided ${resupply(levelOfFuel)} kg of fuel from the tanks, and stole a ${notStolenCargo[0]} and an ${notStolenCargo[1]} from the cargo hold.`;
+}
